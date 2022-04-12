@@ -1,0 +1,12 @@
+Market Service
+	- Create Market
+		- name
+		- quantity
+		- price
+		
+	- Get All available markets
+	- Listen to order 
+
+
+	==========Redis Docker==================
+	docker run -it --rm --name gql-redis -p 6379:6379 redis:5-alpine

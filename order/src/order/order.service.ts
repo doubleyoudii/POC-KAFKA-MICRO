@@ -14,6 +14,7 @@ export class OrderService {
     private readonly orderModel: Model<OrderDocument>,
     @Inject('USER_SERVICE') private readonly userClient: ClientKafka,
     @Inject('MARKET_SERVICE') private readonly marketClient: ClientKafka,
+    @Inject('API_GATEWAY_SERVICE') private readonly apiClient: ClientKafka,
   ) {}
 
   async getOrders() {
@@ -32,6 +33,7 @@ export class OrderService {
       .subscribe(async (market) => {
         getMarket = await market;
         console.log(getMarket);
+        this.apiClient.emit('market_update', {});
       });
     this.userClient
       .send('get_user', new GetUserRequest(data.user_id))

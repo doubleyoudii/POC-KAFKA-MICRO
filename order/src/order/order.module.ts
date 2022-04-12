@@ -40,6 +40,19 @@ import { OrderService } from './order.service';
           },
         },
       },
+      {
+        name: 'API_GATEWAY_SERVICE',
+        transport: Transport.KAFKA,
+        options: {
+          client: {
+            clientId: 'api-gateway',
+            brokers: ['localhost:9092'],
+          },
+          consumer: {
+            groupId: 'api-consumer-order',
+          },
+        },
+      },
     ]),
   ],
   controllers: [OrderController],

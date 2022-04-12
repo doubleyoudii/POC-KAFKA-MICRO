@@ -6,7 +6,7 @@ import {
   OnModuleInit,
   Post,
 } from '@nestjs/common';
-import { ClientKafka } from '@nestjs/microservices';
+import { ClientKafka, EventPattern } from '@nestjs/microservices';
 import { CreateMarket } from 'src/dtos/create-market.dto';
 import { MarketService } from './market.service';
 
@@ -29,5 +29,10 @@ export class MarketController implements OnModuleInit {
   @Post()
   createMarket(@Body() body: CreateMarket) {
     this.marketService.createMarket(body);
+  }
+
+  @EventPattern('market_update')
+  handleMarketChange() {
+    this.marketService.getAll();
   }
 }
